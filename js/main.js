@@ -275,3 +275,37 @@ if ('serviceWorker' in navigator) {
         // navigator.serviceWorker.register('/sw.js');
     });
 }
+/* =========================
+   🌙 Dark Mode Toggle Logic
+   ========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("darkModeToggle");
+
+    // Safety check
+    if (!toggleBtn) {
+        console.warn("Dark mode toggle button not found");
+        return;
+    }
+
+    // Load saved mode
+    const savedMode = localStorage.getItem("dark-mode");
+    if (savedMode === "enabled") {
+        document.body.classList.add("dark-mode");
+        toggleBtn.textContent = "☀️";
+    }
+
+    // Toggle on click
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("dark-mode", "enabled");
+            toggleBtn.textContent = "☀️";
+        } else {
+            localStorage.setItem("dark-mode", "disabled");
+            toggleBtn.textContent = "🌙";
+        }
+    });
+});
+
